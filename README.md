@@ -5,7 +5,7 @@ This is a Tilda API client for Node.js and browser written in Typescript.
 ## Installation
 
 ```shell
-npm install tilda-client
+npm i tilda-client
 ```
 
 or
