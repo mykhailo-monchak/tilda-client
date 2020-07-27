@@ -14,11 +14,11 @@ or
 yarn add tilda-client
 ```
 
-## Simple example
+## Simple Example
 
-As demonstrated by this example, you can get a list of all projects and load detailed project data. The detailed project object contains CSS and JS data.
+As demonstrated by this example, you can get a list of all projects and load detailed project data. The detailed project object contains **CSS** and **JS** data.
 
-And also you can get a list of all pages in the project and load complete page data per each of them. The detailed page object contains HTML of the page.
+And also you can get a list of all pages in the project and load complete page data per each of them. The detailed page object contains **HTML** of the page.
 
 ```typescript
 import { TildaClient, TildaProject, TildaProjectData, TildaPage, TildaPageData } from 'tilda-client';
@@ -46,9 +46,9 @@ for (const p of projects) {
 
 ## Configuration
 
-You can get public and secret keys in your Tilda account [here](https://tilda.cc/identity/apikeys/).
+You can get public and secret keys in your Tilda account <a href="https://tilda.cc/identity/apikeys/" target="_blank">here</a>.
 
-Please read [Tilda API documentation](https://help.tilda.ws/api/) and pay attention that there is a limit to the number of requests as 150 per hour.
+Please read <a href="https://help.tilda.ws/api/" target="_blank">Tilda API documentation</a> and pay attention that there is a limit to the number of requests as **150 per hour**.
 
 ## Need Help?
 
