@@ -1,2 +1,2 @@
 export * from './tilda.client';
-export * from './tilda.interfaces';
+export * from './tilda.types';
