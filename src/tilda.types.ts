@@ -1,3 +1,10 @@
+export interface TildaResponse<T> {
+  status: 'FOUND' | 'ERROR';
+  result: T;
+  errorside: string;
+  message: string;
+}
+
 export interface TildaProject {
   id: string;
   title: string;

@@ -1,61 +1,55 @@
-import { TildaProject, TildaPage, TildaPageData, TildaProjectData } from './tilda.types';
-import axios, { AxiosResponse } from 'axios';
+import { TildaProject, TildaPage, TildaPageData, TildaProjectData, TildaResponse } from './tilda.types';
+import fetch from 'cross-fetch';
+import { TildaClientError } from './tilda-client.error';
 
 export class TildaClient {
   constructor(private readonly publicKey: string, private readonly secretKey: string) {}
 
   public async getProject(projectId: string): Promise<TildaProjectData> {
-    const res: AxiosResponse<TildaResponse<TildaProjectData>> = await axios.get(
+    const res: Response = await fetch(
       `https://api.tildacdn.info/v1/getproject/?publickey=${this.publicKey}&secretkey=${this.secretKey}&projectid=${projectId}`,
     );
 
-    if (res.status === 200 && res.data.status === 'FOUND') {
-      return res.data.result;
+    if (res.ok) {
+      return ((await res.json()) as TildaResponse<TildaProjectData>).result;
     } else {
-      throw Error(res.data.message);
+      throw new TildaClientError(res);
     }
   }
 
   public async getProjectsList(): Promise<TildaProject[]> {
-    const res: AxiosResponse<TildaResponse<TildaProject[]>> = await axios.get(
+    const res: Response = await fetch(
       `https://api.tildacdn.info/v1/getprojectslist/?publickey=${this.publicKey}&secretkey=${this.secretKey}`,
     );
 
-    if (res.status === 200 && res.data.status === 'FOUND') {
-      return res.data.result;
+    if (res.ok) {
+      return ((await res.json()) as TildaResponse<TildaProject[]>).result;
     } else {
-      throw Error(res.data.message);
+      throw new TildaClientError(res);
     }
   }
 
   public async getPage(pageId: string): Promise<TildaPageData> {
-    const res: AxiosResponse<TildaResponse<TildaPageData>> = await axios.get(
+    const res: Response = await fetch(
       `https://api.tildacdn.info/v1/getpage/?publickey=${this.publicKey}&secretkey=${this.secretKey}&pageid=${pageId}`,
     );
 
-    if (res.status === 200 && res.data.status === 'FOUND') {
-      return res.data.result;
+    if (res.ok) {
+      return ((await res.json()) as TildaResponse<TildaPageData>).result;
     } else {
-      throw Error(res.data.message);
+      throw new TildaClientError(res);
     }
   }
 
   public async getPagesList(projectId: string): Promise<TildaPage[]> {
-    const res: AxiosResponse<TildaResponse<TildaPage[]>> = await axios.get(
+    const res: Response = await fetch(
       `https://api.tildacdn.info/v1/getpageslist/?publickey=${this.publicKey}&secretkey=${this.secretKey}&projectid=${projectId}`,
     );
 
-    if (res.status === 200 && res.data.status === 'FOUND') {
-      return res.data.result;
+    if (res.ok) {
+      return ((await res.json()) as TildaResponse<TildaPage[]>).result;
     } else {
-      throw Error(res.data.message);
+      throw new TildaClientError(res);
     }
   }
-}
-
-interface TildaResponse<T> {
-  status: 'FOUND' | 'ERROR';
-  result: T;
-  errorside: string;
-  message: string;
 }
