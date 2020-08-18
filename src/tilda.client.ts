@@ -23,7 +23,7 @@ export class TildaClient {
     );
 
     if (res.ok) {
-      return ((await res.json()) as TildaResponse<TildaProject[]>).result;
+      return ((await res.json()) as TildaResponse<TildaProject[]>).result || [];
     } else {
       throw new TildaClientError(res);
     }
@@ -47,7 +47,7 @@ export class TildaClient {
     );
 
     if (res.ok) {
-      return ((await res.json()) as TildaResponse<TildaPage[]>).result;
+      return ((await res.json()) as TildaResponse<TildaPage[]>).result || [];
     } else {
       throw new TildaClientError(res);
     }
