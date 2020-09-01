@@ -1,6 +1,5 @@
-import { TildaProject, TildaPage, TildaPageData, TildaProjectData, TildaResponse } from './tilda.types';
+import { TildaProject, TildaPage, TildaPageData, TildaProjectData, TildaResponse, TildaError } from '.';
 import fetch from 'cross-fetch';
-import { TildaError } from './tilda.error';
 
 export class TildaClient {
   constructor(private readonly publicKey: string, private readonly secretKey: string) {}
