@@ -1,4 +1,4 @@
-import { TildaProject, TildaPage, TildaPageData, TildaProjectData, TildaResponse, TildaError } from '.';
+import { TildaProject, TildaPage, TildaPageData, TildaProjectData, TildaResponse, throwTildaError } from '.';
 import fetch from 'cross-fetch';
 
 export class TildaClient {
@@ -12,7 +12,7 @@ export class TildaClient {
     if (res.ok) {
       return ((await res.json()) as TildaResponse<TildaProjectData>).result;
     } else {
-      throw new TildaError(res);
+      await throwTildaError(res);
     }
   }
 
@@ -24,7 +24,7 @@ export class TildaClient {
     if (res.ok) {
       return ((await res.json()) as TildaResponse<TildaProject[]>).result || [];
     } else {
-      throw new TildaError(res);
+      await throwTildaError(res);
     }
   }
 
@@ -36,7 +36,7 @@ export class TildaClient {
     if (res.ok) {
       return ((await res.json()) as TildaResponse<TildaPageData>).result;
     } else {
-      throw new TildaError(res);
+      await throwTildaError(res);
     }
   }
 
@@ -48,7 +48,7 @@ export class TildaClient {
     if (res.ok) {
       return ((await res.json()) as TildaResponse<TildaPage[]>).result || [];
     } else {
-      throw new TildaError(res);
+      await throwTildaError(res);
     }
   }
 }
