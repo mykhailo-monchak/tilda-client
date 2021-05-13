@@ -17,6 +17,27 @@ export interface TildaProjectData extends TildaProject {
   js: string[];
 }
 
+export interface TildaProjectExport extends TildaProject {
+  customdomain: string;
+  export_csspath: string;
+  export_jspath: string;
+  export_imgpath: string;
+  indexpageid: string;
+  css: Array<{
+    from: string;
+    to: string;
+  }>;
+  js: Array<{
+    from: string;
+    to: string;
+  }>;
+  images: Array<{
+    from: string;
+    to: string;
+  }>;
+  htaccess: string;
+}
+
 export interface TildaPage {
   id: string;
   projectid: string;
@@ -32,5 +53,13 @@ export interface TildaPage {
 }
 
 export interface TildaPageData extends TildaPage {
+  html: string;
+}
+
+export interface TildaPageExport extends TildaPage {
+  images: Array<{
+    from: string;
+    to: string;
+  }>;
   html: string;
 }
