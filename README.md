@@ -20,6 +20,8 @@ As demonstrated by this example, you can get a list of all projects and load det
 
 And also you can get a list of all pages in the project and load complete page data per each of them. The detailed page object contains **HTML** of the page.
 
+You can also choose to load short or full, and standard or export versions of pages or projects. Find more detail on the <a href="https://help-ru.tilda.cc/api" target="_blank">API description page</a>.
+
 ```typescript
 import { TildaClient, TildaProject, TildaProjectData, TildaPage, TildaPageData } from 'tilda-client';
 
