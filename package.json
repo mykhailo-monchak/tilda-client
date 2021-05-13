@@ -20,11 +20,13 @@
     "format": "prettier --write \"{src,test}/**/*.ts\"",
     "lint": "eslint \"{src,test}/**/*.ts\" --fix",
     "prepare": "npm run build",
-    "prepublishOnly": "npm run lint",
+    "prepublishOnly": "pinst --disable && npm run lint",
     "preversion": "npm run lint",
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags",
-    "pub": "npm version patch && npm publish"
+    "pub": "npm version patch && npm publish",
+    "postinstall": "husky install",
+    "postpublish": "pinst --enable"
   },
   "devDependencies": {
     "@types/node": "^15.0.3",
@@ -36,17 +38,12 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "^3.4.0",
     "husky": "^6.0.0",
+    "pinst": "^2.1.6",
     "prettier": "^2.3.0",
     "rimraf": "^3.0.2",
     "ts-node": "^9.1.1",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^4.2.4"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run format && npm run lint",
-      "pre-push": "npm run build"
-    }
   },
   "dependencies": {
     "cross-fetch": "^3.1.4"
