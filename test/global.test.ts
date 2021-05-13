@@ -10,8 +10,13 @@ async function test() {
 
   const projectsList = await client.getProjectsList();
   const project = await client.getProject(projectsList[0].id);
+  const projectExport = await client.getProjectExport(projectsList[0].id);
+
   const pagesList = await client.getPagesList(projectsList[0].id);
   const page = await client.getPage(pagesList[0].id);
+  const pageFull = await client.getPageFull(pagesList[0].id);
+  const pageExport = await client.getPageExport(pagesList[0].id);
+  const pageFullExport = await client.getPageFullExport(pagesList[0].id);
 
   console.log('tested');
 }
