@@ -11,126 +11,74 @@ import {
 } from '.';
 import fetch from 'cross-fetch';
 
+const API_BASE_URL = 'https://api.tildacdn.info/v1';
+
 export class TildaClient {
   constructor(private readonly publicKey: string, private readonly secretKey: string) {}
+
+  private async fetchResult<T>(method: string, params: Record<string, string> = {}): Promise<T> {
+    const query = new URLSearchParams({ publickey: this.publicKey, secretkey: this.secretKey, ...params });
+    const res: Response = await fetch(`${API_BASE_URL}/${method}/?${query.toString()}`);
+
+    if (res.ok) {
+      return (await parseJsonResponse<TildaResponse<T>>(res)).result;
+    }
+    return throwTildaError(res);
+  }
 
   /**
    * @returns The list of available projects
    */
   public async getProjectsList(): Promise<TildaProject[]> {
-    const res: Response = await fetch(
-      `https://api.tildacdn.info/v1/getprojectslist/?publickey=${this.publicKey}&secretkey=${this.secretKey}`,
-    );
-
-    if (res.ok) {
-      return (await parseJsonResponse<TildaResponse<TildaProject[]>>(res)).result || [];
-    } else {
-      await throwTildaError(res);
-    }
+    return (await this.fetchResult<TildaProject[]>('getprojectslist')) || [];
   }
 
   /**
    * @returns The information about the project
    */
   public async getProject(projectId: string): Promise<TildaProjectData> {
-    const res: Response = await fetch(
-      `https://api.tildacdn.info/v1/getproject/?publickey=${this.publicKey}&secretkey=${this.secretKey}&projectid=${projectId}`,
-    );
-
-    if (res.ok) {
-      return (await parseJsonResponse<TildaResponse<TildaProjectData>>(res)).result;
-    } else {
-      await throwTildaError(res);
-    }
+    return this.fetchResult<TildaProjectData>('getproject', { projectid: projectId });
   }
 
   /**
    * @returns The information about the project for export
    */
   public async getProjectExport(projectId: string): Promise<TildaProjectExport> {
-    const res: Response = await fetch(
-      `https://api.tildacdn.info/v1/getprojectexport/?publickey=${this.publicKey}&secretkey=${this.secretKey}&projectid=${projectId}`,
-    );
-
-    if (res.ok) {
-      return (await parseJsonResponse<TildaResponse<TildaProjectExport>>(res)).result;
-    } else {
-      await throwTildaError(res);
-    }
+    return this.fetchResult<TildaProjectExport>('getprojectexport', { projectid: projectId });
   }
 
   /**
    * @returns The list of available pages in the project
    */
   public async getPagesList(projectId: string): Promise<TildaPage[]> {
-    const res: Response = await fetch(
-      `https://api.tildacdn.info/v1/getpageslist/?publickey=${this.publicKey}&secretkey=${this.secretKey}&projectid=${projectId}`,
-    );
-
-    if (res.ok) {
-      return (await parseJsonResponse<TildaResponse<TildaPage[]>>(res)).result || [];
-    } else {
-      await throwTildaError(res);
-    }
+    return (await this.fetchResult<TildaPage[]>('getpageslist', { projectid: projectId })) || [];
   }
 
   /**
    * @returns The information about the page (+ body html-code)
    */
   public async getPage(pageId: string): Promise<TildaPageData> {
-    const res: Response = await fetch(
-      `https://api.tildacdn.info/v1/getpage/?publickey=${this.publicKey}&secretkey=${this.secretKey}&pageid=${pageId}`,
-    );
-
-    if (res.ok) {
-      return (await parseJsonResponse<TildaResponse<TildaPageData>>(res)).result;
-    } else {
-      await throwTildaError(res);
-    }
+    return this.fetchResult<TildaPageData>('getpage', { pageid: pageId });
   }
 
   /**
    * @returns The information about the page (+ fullpage html-code)
    */
   public async getPageFull(pageId: string): Promise<TildaPageData> {
-    const res: Response = await fetch(
-      `https://api.tildacdn.info/v1/getpagefull/?publickey=${this.publicKey}&secretkey=${this.secretKey}&pageid=${pageId}`,
-    );
-
-    if (res.ok) {
-      return (await parseJsonResponse<TildaResponse<TildaPageData>>(res)).result;
-    } else {
-      await throwTildaError(res);
-    }
+    return this.fetchResult<TildaPageData>('getpagefull', { pageid: pageId });
   }
 
   /**
    * @returns The information about the page for export (+ body html-code)
    */
   public async getPageExport(pageId: string): Promise<TildaPageExport> {
-    const res: Response = await fetch(
-      `https://api.tildacdn.info/v1/getpageexport/?publickey=${this.publicKey}&secretkey=${this.secretKey}&pageid=${pageId}`,
-    );
-
-    if (res.ok) {
-      return (await parseJsonResponse<TildaResponse<TildaPageExport>>(res)).result;
-    } else {
-      await throwTildaError(res);
-    }
+    return this.fetchResult<TildaPageExport>('getpageexport', { pageid: pageId });
   }
 
   /**
    * @returns The information about the page for export (+ fullpage html-code)
    */
   public async getPageFullExport(pageId: string): Promise<TildaPageExport> {
-    const res: Response = await fetch(
-      `https://api.tildacdn.info/v1/getpagefullexport/?publickey=${this.publicKey}&secretkey=${this.secretKey}&pageid=${pageId}`,
-    );
-
-    if (res.ok) {
-      return (await parseJsonResponse<TildaResponse<TildaPageExport>>(res)).result;
-    } else {
-      await throwTildaError(res);
-    }
+    return this.fetchResult<TildaPageExport>('getpagefullexport', { pageid: pageId });
   }
 }

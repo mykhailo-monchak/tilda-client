@@ -6,7 +6,9 @@
     "sourceMap": true,
     "outDir": "./lib",
     "baseUrl": "./",
-    "incremental": true
+    "incremental": true,
+    "strict": true,
+    "noImplicitReturns": true
   },
   "include": ["src"]
 }

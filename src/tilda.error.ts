@@ -22,7 +22,7 @@ export async function parseJsonResponse<T>(response: Response): Promise<T> {
   }
 }
 
-export async function throwTildaError(response: Response): Promise<void> {
+export async function throwTildaError(response: Response): Promise<never> {
   const tildaError = await parseJsonResponse<{ status: string; message: string; errorside: string }>(response);
   throw new TildaError(tildaError.status, tildaError.message);
 }
