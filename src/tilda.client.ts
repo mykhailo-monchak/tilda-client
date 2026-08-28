@@ -5,6 +5,7 @@ import {
   TildaProjectData,
   TildaResponse,
   throwTildaError,
+  parseJsonResponse,
   TildaProjectExport,
   TildaPageExport,
 } from '.';
@@ -22,7 +23,7 @@ export class TildaClient {
     );
 
     if (res.ok) {
-      return ((await res.json()) as TildaResponse<TildaProject[]>).result || [];
+      return (await parseJsonResponse<TildaResponse<TildaProject[]>>(res)).result || [];
     } else {
       await throwTildaError(res);
     }
@@ -37,7 +38,7 @@ export class TildaClient {
     );
 
     if (res.ok) {
-      return ((await res.json()) as TildaResponse<TildaProjectData>).result;
+      return (await parseJsonResponse<TildaResponse<TildaProjectData>>(res)).result;
     } else {
       await throwTildaError(res);
     }
@@ -52,7 +53,7 @@ export class TildaClient {
     );
 
     if (res.ok) {
-      return ((await res.json()) as TildaResponse<TildaProjectExport>).result;
+      return (await parseJsonResponse<TildaResponse<TildaProjectExport>>(res)).result;
     } else {
       await throwTildaError(res);
     }
@@ -67,7 +68,7 @@ export class TildaClient {
     );
 
     if (res.ok) {
-      return ((await res.json()) as TildaResponse<TildaPage[]>).result || [];
+      return (await parseJsonResponse<TildaResponse<TildaPage[]>>(res)).result || [];
     } else {
       await throwTildaError(res);
     }
@@ -82,7 +83,7 @@ export class TildaClient {
     );
 
     if (res.ok) {
-      return ((await res.json()) as TildaResponse<TildaPageData>).result;
+      return (await parseJsonResponse<TildaResponse<TildaPageData>>(res)).result;
     } else {
       await throwTildaError(res);
     }
@@ -97,7 +98,7 @@ export class TildaClient {
     );
 
     if (res.ok) {
-      return ((await res.json()) as TildaResponse<TildaPageData>).result;
+      return (await parseJsonResponse<TildaResponse<TildaPageData>>(res)).result;
     } else {
       await throwTildaError(res);
     }
@@ -112,7 +113,7 @@ export class TildaClient {
     );
 
     if (res.ok) {
-      return ((await res.json()) as TildaResponse<TildaPageExport>).result;
+      return (await parseJsonResponse<TildaResponse<TildaPageExport>>(res)).result;
     } else {
       await throwTildaError(res);
     }
@@ -127,7 +128,7 @@ export class TildaClient {
     );
 
     if (res.ok) {
-      return ((await res.json()) as TildaResponse<TildaPageExport>).result;
+      return (await parseJsonResponse<TildaResponse<TildaPageExport>>(res)).result;
     } else {
       await throwTildaError(res);
     }
