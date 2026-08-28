@@ -6,7 +6,7 @@ import * as dotenv from 'dotenv';
 async function test() {
   dotenv.config();
 
-  const client = new TildaClient(process.env.TEST_PUBLIC_KEY, process.env.TEST_SECRET_KEY);
+  const client = new TildaClient(process.env.TEST_PUBLIC_KEY!, process.env.TEST_SECRET_KEY!);
 
   const projectsList = await client.getProjectsList();
   const project = await client.getProject(projectsList[0].id);
