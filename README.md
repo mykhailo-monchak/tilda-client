@@ -54,4 +54,4 @@ Please read <a href="https://help.tilda.ws/api/" target="_blank">Tilda API docum
 
 ## Need Help?
 
-Drop me an email to [Mikhail Monchak](mailto:mikhail.monchak.work@gmail.com)
+Drop me an email to [Mykhailo Monchak](mailto:biz.monchak@gmail.com)
